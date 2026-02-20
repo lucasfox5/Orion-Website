@@ -9,8 +9,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #0d0d14; /* same dark background */
-            color: white;
+            background: #05060a; /* dark background matching your UI */
+            color: #ffffff;
             display: flex;
         }
 
@@ -21,8 +21,8 @@
             left: 0;
             width: 100%;
             height: 60px;
-            background: #15151f; /* same sidebar colour */
-            border-bottom: 2px solid #1f1f2b; /* same stroke style */
+            background: #141622; /* same tone as your sidebar */
+            border-bottom: 2px solid #23263a;
             display: flex;
             align-items: center;
             padding: 0 20px;
@@ -31,47 +31,47 @@
 
         .topbar img {
             height: 35px;
-            margin-right: 15px;
+            margin-right: 12px;
         }
 
         .topbar-title {
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         /* SIDEBAR */
         .sidebar {
             width: 230px;
-            background: #15151f;
+            background: #141622;
             height: 100vh;
-            padding: 90px 20px 20px 20px; /* pushed down because of top bar */
+            padding: 90px 20px 20px 20px; /* space for top bar */
             box-sizing: border-box;
             position: fixed;
             left: 0;
             top: 0;
-            border-right: 2px solid #1f1f2b; /* same stroke */
+            border-right: 2px solid #23263a;
         }
 
         .sidebar button {
             width: 100%;
             padding: 12px;
             margin-bottom: 12px;
-            background: #1f1f2b;
-            border: 2px solid #2a2a3a;
-            color: white;
+            background: #1b1f30;
+            border: 2px solid #2c3147;
+            color: #ffffff;
             font-size: 15px;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .sidebar button:hover {
-            background: #2a2a3a;
+            background: #252b3f;
         }
 
         .stats {
             margin-top: 20px;
             font-size: 14px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         /* MAIN CONTENT */
@@ -80,12 +80,13 @@
             margin-top: 80px; /* space for top bar */
             padding: 30px;
             width: calc(100% - 250px);
+            box-sizing: border-box;
         }
 
         .header {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 25px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         /* PRODUCT GRID */
@@ -96,47 +97,75 @@
         }
 
         .product-card {
-            background: #1a1a26;
-            border: 2px solid #2a2a3a;
-            padding: 20px;
-            border-radius: 12px;
+            background: #181b2a;
+            border: 2px solid #2c3147;
+            padding: 18px;
+            border-radius: 14px;
             height: 180px;
+            box-sizing: border-box;
         }
 
         .product-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .product-card.red {
+            background: #b0202b;
+            border-color: #e3343f;
+        }
+
+        .product-card.blue {
+            background: #1f4fdc;
+            border-color: #163bb0;
         }
 
         /* BLUE BANNER */
         .banner {
             margin-top: 30px;
-            background: #1d4ed8;
-            border: 2px solid #163fae;
+            background: #1f4fdc;
+            border: 2px solid #163bb0;
             padding: 20px;
             text-align: center;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         /* ANNOUNCEMENT SECTION */
         .announcement {
             margin-top: 40px;
-            background: #1a1a26;
-            border: 2px solid #2a2a3a;
+            background: #181b2a;
+            border: 2px solid #2c3147;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 14px;
         }
 
         .announcement h3 {
             margin: 0 0 10px 0;
-            font-size: 20px;
+            font-size: 19px;
+            font-weight: 700;
         }
 
         .announcement p {
-            opacity: 0.8;
+            opacity: 0.85;
+            margin: 4px 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .main {
+                margin-left: 0;
+                margin-top: 80px;
+                width: 100%;
+            }
+            .sidebar {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -145,8 +174,7 @@
 
     <!-- TOP BAR -->
     <div class="topbar">
-        <!-- Replace with your logo later -->
-        <img src="" alt="">
+        <img src="orion-logo.png" alt="Orion Logo">
         <div class="topbar-title">Orion Development Website</div>
     </div>
 
@@ -174,27 +202,29 @@
                 <p>Description here...</p>
             </div>
 
-            <div class="product-card">
-                <div class="product-title">Product 2</div>
+            <div class="product-card blue">
+                <div class="product-title">Orion Music System</div>
                 <p>Description here...</p>
             </div>
 
-            <div class="product-card">
-                <div class="product-title">Product 3</div>
-                <p>Description here...</p>
+            <div class="product-card red">
+                <div class="product-title">Nova Lighting</div>
+                <p>Lighting & FX products here...</p>
             </div>
         </div>
 
         <!-- BLUE BANNER -->
-        <div class="banner">More products coming soon...</div>
+        <div class="banner">MORE COMING SOON...</div>
 
         <!-- ANNOUNCEMENT -->
         <div class="announcement">
-            <h3>Announcement Title</h3>
-            <p>Description of the announcement goes here.</p>
+            <h3>Announcement</h3>
+            <p>Title</p>
+            <p>Description</p>
             <p>Date: 12/6/26</p>
         </div>
     </div>
 
 </body>
 </html>
+
