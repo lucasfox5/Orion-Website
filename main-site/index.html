@@ -2,14 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orion Product Hub</title>
+    <title>Orion Development Website</title>
+
     <style>
+        /* GLOBAL */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #0f0f17;
+            background: #0d0d14; /* same dark background */
             color: white;
             display: flex;
+        }
+
+        /* TOP BAR */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #15151f; /* same sidebar colour */
+            border-bottom: 2px solid #1f1f2b; /* same stroke style */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .topbar img {
+            height: 35px;
+            margin-right: 15px;
+        }
+
+        .topbar-title {
+            font-size: 20px;
+            font-weight: bold;
         }
 
         /* SIDEBAR */
@@ -17,28 +44,24 @@
             width: 230px;
             background: #15151f;
             height: 100vh;
-            padding: 20px;
+            padding: 90px 20px 20px 20px; /* pushed down because of top bar */
             box-sizing: border-box;
             position: fixed;
             left: 0;
             top: 0;
-        }
-
-        .sidebar h2 {
-            margin-bottom: 20px;
-            font-size: 22px;
+            border-right: 2px solid #1f1f2b; /* same stroke */
         }
 
         .sidebar button {
             width: 100%;
             padding: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             background: #1f1f2b;
-            border: none;
+            border: 2px solid #2a2a3a;
             color: white;
             font-size: 15px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 8px;
         }
 
         .sidebar button:hover {
@@ -54,6 +77,7 @@
         /* MAIN CONTENT */
         .main {
             margin-left: 250px;
+            margin-top: 80px; /* space for top bar */
             padding: 30px;
             width: calc(100% - 250px);
         }
@@ -61,6 +85,7 @@
         .header {
             font-size: 28px;
             margin-bottom: 25px;
+            font-weight: bold;
         }
 
         /* PRODUCT GRID */
@@ -72,35 +97,42 @@
 
         .product-card {
             background: #1a1a26;
+            border: 2px solid #2a2a3a;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             height: 180px;
         }
 
         .product-title {
             font-size: 18px;
             margin-bottom: 10px;
+            font-weight: bold;
         }
 
+        /* BLUE BANNER */
         .banner {
             margin-top: 30px;
             background: #1d4ed8;
+            border: 2px solid #163fae;
             padding: 20px;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 20px;
+            font-weight: bold;
         }
 
         /* ANNOUNCEMENT SECTION */
         .announcement {
             margin-top: 40px;
             background: #1a1a26;
+            border: 2px solid #2a2a3a;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         .announcement h3 {
             margin: 0 0 10px 0;
+            font-size: 20px;
         }
 
         .announcement p {
@@ -108,11 +140,18 @@
         }
     </style>
 </head>
+
 <body>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <!-- Replace with your logo later -->
+        <img src="" alt="">
+        <div class="topbar-title">Orion Development Website</div>
+    </div>
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <h2>Orion Hub</h2>
         <button>Home</button>
         <button>Products</button>
         <button>Redeem Codes</button>
@@ -146,7 +185,7 @@
             </div>
         </div>
 
-        <!-- BANNER -->
+        <!-- BLUE BANNER -->
         <div class="banner">More products coming soon...</div>
 
         <!-- ANNOUNCEMENT -->
