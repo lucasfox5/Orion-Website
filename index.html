@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Orion — Coming Soon</title>
+    <title>Orion Development — Coming Soon</title>
     <style>
         body {
             margin: 0;
@@ -17,6 +17,7 @@
 
         .container {
             animation: fadeIn 1.5s ease forwards;
+            margin-top: -60px; /* moves everything up */
         }
 
         h1 {
@@ -33,14 +34,24 @@
             opacity: 0.8;
         }
 
+        /* Glow behind the logo */
         .glow {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 25px;
+            width: 200px;
+            height: 200px;
+            margin: -180px auto 0; /* moves glow behind logo */
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(120,150,255,0.4), rgba(0,0,0,0));
-            filter: blur(20px);
+            background: radial-gradient(circle, rgba(120,150,255,0.5), rgba(0,0,0,0));
+            filter: blur(30px);
             animation: pulse 3s infinite ease-in-out;
+            position: relative;
+            z-index: 0;
+        }
+
+        .logo {
+            width: 160px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2; /* keeps logo above glow */
         }
 
         @keyframes fadeIn {
@@ -50,7 +61,7 @@
 
         @keyframes pulse {
             0% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+            50% { opacity: 0.9; }
             100% { opacity: 0.4; }
         }
     </style>
@@ -58,15 +69,17 @@
 <body>
     <div class="container">
 
-        <!-- YOUR LOGO -->
-        <img src="image-removebg-preview (19).png" 
-             alt="Orion Logo" 
-             style="width:150px; margin-bottom:20px;">
-
+        <!-- Glow behind logo -->
         <div class="glow"></div>
 
-        <h1>Orion 2.0</h1>
+        <!-- Your Logo -->
+        <img src="image-removebg-preview (19).png" 
+             alt="Orion Logo" 
+             class="logo">
+
+        <h1>Orion Development</h1>
         <p>Our new experience is launching soon.</p>
+
     </div>
 </body>
 </html>
