@@ -4,34 +4,62 @@
     <title>Orion — Coming Soon</title>
     <style>
         body {
-            background: #0b0e17;
-            color: #d6d9e6;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: radial-gradient(circle at top, #1a1f2e, #0b0e17);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #e3e6f3;
             text-align: center;
         }
-        .box {
-            max-width: 500px;
+
+        .container {
+            animation: fadeIn 1.5s ease forwards;
         }
+
         h1 {
-            font-size: 40px;
+            font-size: 48px;
             margin-bottom: 10px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #6a8dff, #8f6bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         p {
-            font-size: 18px;
+            font-size: 20px;
             opacity: 0.8;
+        }
+
+        .glow {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120,150,255,0.4), rgba(0,0,0,0));
+            filter: blur(20px);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.4; }
         }
     </style>
 </head>
 <body>
-    <div class="box">
+    <div class="container">
+        <div class="glow"></div>
         <h1>Orion 2.0</h1>
-        <p>Our new website is coming soon. Stay tuned.</p>
+        <p>Our new experience is launching soon.</p>
     </div>
 </body>
 </html>
