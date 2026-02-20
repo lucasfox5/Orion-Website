@@ -1,10 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Orion Development</title>
+    <meta charset="UTF-8">
+    <title>Orion Product Hub</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f17;
+            color: white;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 230px;
+            background: #15151f;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #1f1f2b;
+            border: none;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .sidebar button:hover {
+            background: #2a2a3a;
+        }
+
+        .stats {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+            width: calc(100% - 250px);
+        }
+
+        .header {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        /* PRODUCT GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #1a1a26;
+            padding: 20px;
+            border-radius: 10px;
+            height: 180px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .banner {
+            margin-top: 30px;
+            background: #1d4ed8;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        /* ANNOUNCEMENT SECTION */
+        .announcement {
+            margin-top: 40px;
+            background: #1a1a26;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .announcement h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .announcement p {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the real Orion site</h1>
-    <p>Work in progress...</p>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Orion Hub</h2>
+        <button>Home</button>
+        <button>Products</button>
+        <button>Redeem Codes</button>
+        <button>Staff Access</button>
+
+        <div class="stats">
+            Credit: 0<br>
+            Products For Sale: 0
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        <div class="header">Welcome to Orion Product Hub!</div>
+
+        <!-- PRODUCT GRID -->
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-title">Product 1</div>
+                <p>Description here...</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">Product 2</div>
+                <p>Description here...</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">Product 3</div>
+                <p>Description here...</p>
+            </div>
+        </div>
+
+        <!-- BANNER -->
+        <div class="banner">More products coming soon...</div>
+
+        <!-- ANNOUNCEMENT -->
+        <div class="announcement">
+            <h3>Announcement Title</h3>
+            <p>Description of the announcement goes here.</p>
+            <p>Date: 12/6/26</p>
+        </div>
+    </div>
+
 </body>
 </html>
