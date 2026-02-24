@@ -20,19 +20,14 @@
             --text-soft: #a5a7c4;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
             min-height: 100vh;
             background: radial-gradient(circle at top, #151528 0, #050509 55%);
             color: var(--text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: system-ui, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
             padding: 40px 16px;
         }
 
@@ -45,7 +40,6 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            gap: 16px;
             margin-bottom: 24px;
         }
 
@@ -54,12 +48,6 @@
             font-size: 28px;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-        }
-
-        .title-block p {
-            margin: 6px 0 0;
-            color: var(--text-soft);
-            font-size: 14px;
         }
 
         .badge {
@@ -98,14 +86,12 @@
             background: linear-gradient(145deg, var(--panel) 0, var(--panel-soft) 100%);
             border-radius: 14px;
             border: 1px solid var(--border);
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 18px 40px rgba(0, 0, 0, 0.7);
-            padding: 18px 18px 16px;
+            padding: 18px;
         }
 
         .panel-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 12px;
         }
 
@@ -143,11 +129,6 @@
             box-shadow: 0 0 10px var(--bad);
         }
 
-        .status-degraded {
-            background: var(--warn);
-            box-shadow: 0 0 10px var(--warn);
-        }
-
         .main-status {
             display: flex;
             flex-direction: column;
@@ -157,7 +138,6 @@
         .main-row {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
             align-items: center;
         }
 
@@ -202,41 +182,6 @@
             font-weight: 500;
         }
 
-        .subgrid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .subcard {
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: radial-gradient(circle at top left, rgba(91, 141, 255, 0.12), transparent 55%), rgba(8, 8, 16, 0.9);
-            padding: 10px 11px;
-        }
-
-        .sub-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--text-soft);
-            margin-bottom: 6px;
-        }
-
-        .sub-main {
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .sub-foot {
-            margin-top: 4px;
-            font-size: 11px;
-            color: var(--text-soft);
-        }
-
         .right-col {
             display: flex;
             flex-direction: column;
@@ -247,13 +192,11 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-top: 6px;
         }
 
         .list-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 7px 9px;
             border-radius: 8px;
             border: 1px solid rgba(38, 38, 58, 0.9);
@@ -261,26 +204,9 @@
             font-size: 12px;
         }
 
-        .list-label {
-            color: var(--text-soft);
-        }
-
-        .list-value {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
         .muted {
             color: var(--text-soft);
             font-size: 11px;
-        }
-
-        .mono {
-            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-
-        .fade-soft {
-            opacity: 0.8;
         }
 
         .error-text {
@@ -295,18 +221,16 @@
     <div class="header">
         <div class="title-block">
             <h1>Orion Product Hub Status</h1>
-            <p id="global-summary">Live operational status for Orion systems and Discord bot.</p>
+            <p id="global-summary">Live operational status for Orion systems.</p>
         </div>
-        <div>
-            <div class="badge">
-                <span class="badge-dot" id="global-dot"></span>
-                <span id="global-state-text">Checking systems…</span>
-            </div>
+        <div class="badge">
+            <span class="badge-dot" id="global-dot"></span>
+            <span id="global-state-text">Checking systems…</span>
         </div>
     </div>
 
     <div class="grid">
-        <!-- LEFT: Main bot + hub status -->
+        <!-- LEFT -->
         <div class="panel">
             <div class="panel-header">
                 <div class="panel-title">Core System</div>
@@ -339,30 +263,10 @@
                         <span class="metric-value" id="metric-heartbeat">–</span>
                     </div>
                 </div>
-
-                <div class="subgrid">
-                    <div class="subcard">
-                        <div class="sub-title">Product Hub</div>
-                        <div class="sub-main">
-                            <span class="status-dot status-online" id="hub-dot"></span>
-                            <span id="hub-text">Operational</span>
-                        </div>
-                        <div class="sub-foot">Frontend (GitHub Pages) serving normally.</div>
-                    </div>
-
-                    <div class="subcard">
-                        <div class="sub-title">Bot API</div>
-                        <div class="sub-main">
-                            <span class="status-dot status-online" id="api-dot"></span>
-                            <span id="api-text">Connected</span>
-                        </div>
-                        <div class="sub-foot mono fade-soft">orionbot-production.up.railway.app</div>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- RIGHT: Extra system info -->
+        <!-- RIGHT -->
         <div class="right-col">
             <div class="panel">
                 <div class="panel-header">
@@ -371,44 +275,21 @@
 
                 <div class="list">
                     <div class="list-item">
-                        <span class="list-label">Bot Status</span>
-                        <span class="list-value" id="list-bot-status">Unknown</span>
+                        <span>Bot Status</span>
+                        <span id="list-bot-status">Unknown</span>
                     </div>
                     <div class="list-item">
-                        <span class="list-label">API Response</span>
-                        <span class="list-value mono" id="list-api-latency">– ms</span>
+                        <span>API Response</span>
+                        <span id="list-api-latency">– ms</span>
                     </div>
                     <div class="list-item">
-                        <span class="list-label">Last Update</span>
-                        <span class="list-value" id="list-last-update">–</span>
+                        <span>Last Update</span>
+                        <span id="list-last-update">–</span>
                     </div>
                 </div>
 
-                <div class="muted" style="margin-top: 10px;">
-                    Data is pulled live from your Railway backend every 5 seconds.
-                </div>
                 <div id="error-box" class="error-text" style="display:none;">
-                    Unable to reach status API. Showing last known state.
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="panel-header">
-                    <div class="panel-title">Endpoints</div>
-                </div>
-                <div class="list">
-                    <div class="list-item">
-                        <span class="list-label">Status JSON</span>
-                        <span class="list-value mono fade-soft">/bot-status</span>
-                    </div>
-                    <div class="list-item">
-                        <span class="list-label">Heartbeat</span>
-                        <span class="list-value mono fade-soft">/heartbeat</span>
-                    </div>
-                </div>
-                <div class="muted" style="margin-top: 10px;">
-                    Ensure your bot is posting heartbeats and your API returns:
-                    <span class="mono">{ status, ping, uptime, lastHeartbeat, version }</span>
+                    Unable to reach status API.
                 </div>
             </div>
         </div>
@@ -424,7 +305,6 @@
         const d = Math.floor(seconds / 86400);
         const h = Math.floor((seconds % 86400) / 3600);
         const m = Math.floor((seconds % 3600) / 60);
-
         const parts = [];
         if (d) parts.push(d + "d");
         if (h) parts.push(h + "h");
@@ -435,20 +315,16 @@
     function formatTime(ts) {
         if (!ts) return "–";
         const date = new Date(ts);
-        if (isNaN(date.getTime())) return "–";
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     }
 
     async function fetchStatus() {
         const t0 = performance.now();
-        let data;
-
         try {
             const res = await fetch(API_URL, { cache: "no-store" });
             const t1 = performance.now();
             const latency = Math.round(t1 - t0);
-
-            data = await res.json();
+            const data = await res.json();
 
             document.getElementById("error-box").style.display = "none";
 
@@ -462,64 +338,36 @@
             const botText = document.getElementById("bot-status-text");
             const botMain = document.getElementById("bot-main-state");
             const botVersion = document.getElementById("bot-version");
-            const metricPing = document.getElementById("metric-ping");
-            const metricUptime = document.getElementById("metric-uptime");
-            const metricHeartbeat = document.getElementById("metric-heartbeat");
-            const listBotStatus = document.getElementById("list-bot-status");
-            const listApiLatency = document.getElementById("list-api-latency");
-            const listLastUpdate = document.getElementById("list-last-update");
-            const globalDot = document.getElementById("global-dot");
-            const globalStateText = document.getElementById("global-state-text");
-            const globalSummary = document.getElementById("global-summary");
-            const apiDot = document.getElementById("api-dot");
-            const apiText = document.getElementById("api-text");
 
-            botDot.classList.remove("status-online", "status-offline", "status-degraded");
-            apiDot.classList.remove("status-online", "status-offline", "status-degraded");
-            globalDot.style.boxShadow = "";
+            botDot.classList.remove("status-online", "status-offline");
 
             if (status === "online") {
                 botDot.classList.add("status-online");
-                apiDot.classList.add("status-online");
                 botText.textContent = "Online";
                 botMain.textContent = "System Online";
-                globalDot.style.background = "var(--good)";
-                globalDot.style.boxShadow = "0 0 10px var(--good)";
-                globalStateText.textContent = "All core Orion systems are online.";
-                globalSummary.textContent = "Live operational status for Orion Product Hub and Discord bot.";
+                document.getElementById("global-dot").style.background = "var(--good)";
+                document.getElementById("global-state-text").textContent = "All systems operational.";
             } else {
                 botDot.classList.add("status-offline");
-                apiDot.classList.add("status-offline");
                 botText.textContent = "Offline";
                 botMain.textContent = "System Offline";
-                globalDot.style.background = "var(--bad)";
-                globalDot.style.boxShadow = "0 0 10px var(--bad)";
-                globalStateText.textContent = "Orion bot is currently offline.";
-                globalSummary.textContent = "Waiting for the bot to resume heartbeats to the status API.";
+                document.getElementById("global-dot").style.background = "var(--bad)";
+                document.getElementById("global-state-text").textContent = "Bot offline.";
             }
 
             botVersion.textContent = "v" + String(version).replace(/^v/i, "");
-            metricPing.textContent = ping != null ? ping + " ms" : "– ms";
-            metricUptime.textContent = formatUptime(uptime);
-            metricHeartbeat.textContent = formatTime(lastHeartbeat);
-            listBotStatus.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-            listApiLatency.textContent = latency + " ms";
-            listLastUpdate.textContent = formatTime(Date.now());
-        } catch (e) {
+            document.getElementById("metric-ping").textContent = ping != null ? ping + " ms" : "– ms";
+            document.getElementById("metric-uptime").textContent = formatUptime(uptime);
+            document.getElementById("metric-heartbeat").textContent = formatTime(lastHeartbeat);
+
+            document.getElementById("list-bot-status").textContent = status;
+            document.getElementById("list-api-latency").textContent = latency + " ms";
+            document.getElementById("list-last-update").textContent = formatTime(Date.now());
+
+        } catch {
             document.getElementById("error-box").style.display = "block";
-
-            const globalDot = document.getElementById("global-dot");
-            const globalStateText = document.getElementById("global-state-text");
-            const apiDot = document.getElementById("api-dot");
-            const apiText = document.getElementById("api-text");
-
-            apiDot.classList.remove("status-online");
-            apiDot.classList.add("status-offline");
-            apiText.textContent = "Unreachable";
-
-            globalDot.style.background = "var(--warn)";
-            globalDot.style.boxShadow = "0 0 10px var(--warn)";
-            globalStateText.textContent = "Status API unreachable. Check Railway deployment.";
+            document.getElementById("global-dot").style.background = "var(--warn)";
+            document.getElementById("global-state-text").textContent = "API unreachable.";
         }
     }
 
