@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Status | Orion</title>
+
+    <style>
+        body {
+            background: #0d0d0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: #141418;
+            border: 1px solid #2b2b31;
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+        }
+
+        .status-dot {
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .online { background: #00ff6a; }
+        .offline { background: #ff3b3b; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Orion Bot Status</h2>
+        <p>
+            <span id="dot" class="status-dot offline"></span>
+            <span id="status-text">Checking...</span>
+        </p>
+    </div>
+
+    <script>
+        async function checkStatus() {
+            try {
+                const res = await fetch("https://your-api-here.com/bot-status");
+                const data = await res.json();
+
+                const dot = document.getElementById("dot");
+                const text = document.getElementById("status-text");
+
+                if (data.status === "online") {
+                    dot.className = "status-dot online";
+                    text.textContent = "Online";
+                } else {
+                    dot.className = "status-dot offline";
+                    text.textContent = "Offline";
+                }
+            } catch {
+                document.getElementById("status-text").textContent = "Offline";
+            }
+        }
+
+        checkStatus();
+        setInterval(checkStatus, 5000);
+    </script>
+
+</body>
+</html>
