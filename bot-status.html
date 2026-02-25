@@ -3,116 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orion Product Hub Status</title>
+    <title>Orion Bot Status</title>
 
     <style>
-        :root {
-            --bg: #050509;
-            --panel: #101018;
-            --panel-soft: #141422;
-            --border: #26263a;
-            --good: #00ff88;
-            --bad: #ff4b5c;
-            --text-main: #ffffff;
-            --text-soft: #a5a7c4;
-        }
-
         body {
+            background: #0d0d16;
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at top, #151528 0, #050509 55%);
-            color: var(--text-main);
-            font-family: system-ui, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 40px 16px;
+            padding: 20px;
         }
 
-        .wrap {
-            width: 100%;
-            max-width: 1100px;
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #141422;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #26263a;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 24px;
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+            text-align: center;
         }
 
-        .badge {
-            padding: 6px 12px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: rgba(10, 10, 18, 0.9);
-            font-size: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-soft);
+        .status-box {
+            background: #101018;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #26263a;
+            margin-bottom: 20px;
         }
 
-        .badge-dot {
-            width: 8px;
-            height: 8px;
+        .dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: var(--good);
-            box-shadow: 0 0 8px var(--good);
+            display: inline-block;
+            margin-right: 8px;
         }
 
-        .panel {
-            background: linear-gradient(145deg, var(--panel) 0, var(--panel-soft) 100%);
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            padding: 18px;
+        .online {
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88;
         }
 
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
+        .offline {
+            background: #ff4b5c;
+            box-shadow: 0 0 8px #ff4b5c;
         }
 
-        .status-online {
-            background: var(--good);
-            box-shadow: 0 0 10px var(--good);
+        .label {
+            font-weight: bold;
         }
 
-        .status-offline {
-            background: var(--bad);
-            box-shadow: 0 0 10px var(--bad);
+        .value {
+            color: #a5a7c4;
         }
     </style>
 </head>
 <body>
-<div class="wrap">
-    <div class="header">
-        <h1>Orion Product Hub Status</h1>
-        <div class="badge">
-            <span class="badge-dot" id="global-dot"></span>
-            <span id="global-state-text">Checking…</span>
-        </div>
+
+<div class="container">
+    <h1>Orion Bot Status</h1>
+
+    <div class="status-box">
+        <p><span id="status-dot" class="dot offline"></span><span id="status-text">Checking…</span></p>
+        <p><span class="label">Ping:</span> <span class="value" id="ping">–</span></p>
+        <p><span class="label">Uptime:</span> <span class="value" id="uptime">–</span></p>
+        <p><span class="label">Last Heartbeat:</span> <span class="value" id="heartbeat">–</span></p>
+        <p><span class="label">Version:</span> <span class="value" id="version">–</span></p>
     </div>
 
-    <div class="panel">
-        <h2>Bot Status</h2>
-        <p>
-            <span id="bot-status-dot" class="status-dot status-offline"></span>
-            <span id="bot-status-text">Unknown</span>
-        </p>
-
-        <p>Ping: <span id="metric-ping">–</span></p>
-        <p>Uptime: <span id="metric-uptime">–</span></p>
-        <p>Last Heartbeat: <span id="metric-heartbeat">–</span></p>
-        <p>Version: <span id="bot-version">–</span></p>
-
+    <div class="status-box">
         <h3>Downtime</h3>
-        <p>Last Offline: <span id="downtime-last">–</span></p>
+        <p><span class="label">Last Offline:</span> <span class="value" id="last-offline">–</span></p>
     </div>
 </div>
 
 <script>
     const STATUS_URL = "https://orionbot-production.up.railway.app/status";
     const DOWNTIME_URL = "https://orionbot-production.up.railway.app/downtime";
+
+    function formatTime(ts) {
+        if (!ts) return "–";
+        return new Date(ts).toLocaleTimeString();
+    }
 
     function formatUptime(seconds) {
         if (!seconds) return "–";
@@ -122,61 +100,51 @@
         return `${h}h ${m}m`;
     }
 
-    function formatTime(ts) {
-        if (!ts) return "–";
-        return new Date(ts).toLocaleTimeString();
-    }
-
-    async function fetchStatus() {
+    async function loadStatus() {
         try {
             const res = await fetch(STATUS_URL);
             const data = await res.json();
 
-            const dot = document.getElementById("bot-status-dot");
-            const text = document.getElementById("bot-status-text");
-
-            dot.classList.remove("status-online", "status-offline");
+            const dot = document.getElementById("status-dot");
+            const text = document.getElementById("status-text");
 
             if (data.online) {
-                dot.classList.add("status-online");
+                dot.className = "dot online";
                 text.textContent = "Online";
-                document.getElementById("global-dot").style.background = "var(--good)";
-                document.getElementById("global-state-text").textContent = "All systems operational.";
             } else {
-                dot.classList.add("status-offline");
+                dot.className = "dot offline";
                 text.textContent = "Offline";
-                document.getElementById("global-dot").style.background = "var(--bad)";
-                document.getElementById("global-state-text").textContent = "Bot offline.";
             }
 
-            document.getElementById("metric-ping").textContent = data.ping + " ms";
-            document.getElementById("metric-uptime").textContent = formatUptime(data.uptime);
-            document.getElementById("metric-heartbeat").textContent = formatTime(data.lastHeartbeat);
-            document.getElementById("bot-version").textContent = data.version;
+            document.getElementById("ping").textContent = data.ping + " ms";
+            document.getElementById("uptime").textContent = formatUptime(data.uptime);
+            document.getElementById("heartbeat").textContent = formatTime(data.lastHeartbeat);
+            document.getElementById("version").textContent = data.version;
 
-        } catch {
-            document.getElementById("global-dot").style.background = "var(--bad)";
-            document.getElementById("global-state-text").textContent = "API unreachable.";
+        } catch (err) {
+            document.getElementById("status-dot").className = "dot offline";
+            document.getElementById("status-text").textContent = "API unreachable";
         }
     }
 
-    async function fetchDowntime() {
+    async function loadDowntime() {
         try {
             const res = await fetch(DOWNTIME_URL);
             const data = await res.json();
 
-            document.getElementById("downtime-last").textContent =
+            document.getElementById("last-offline").textContent =
                 data.lastOffline ? formatTime(data.lastOffline) : "–";
 
-        } catch {
-            document.getElementById("downtime-last").textContent = "–";
+        } catch (err) {
+            document.getElementById("last-offline").textContent = "–";
         }
     }
 
-    fetchStatus();
-    fetchDowntime();
-    setInterval(fetchStatus, 5000);
-    setInterval(fetchDowntime, 5000);
+    loadStatus();
+    loadDowntime();
+    setInterval(loadStatus, 5000);
+    setInterval(loadDowntime, 5000);
 </script>
+
 </body>
 </html>
